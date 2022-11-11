@@ -61,21 +61,21 @@ export default function Service() {
       body: JSON.stringify(commentIn)
     })
       .then(res => res.json())
-      .then(data => {
+      .then(dataOut => {
         setComment('')
-        navigate(`/services/${data[0]._id}`)
+        navigate(`/services/${data[0]?._id}`)
       })
       .catch(err => console.error(err))
 
   }
   useEffect(() => {
-    fetch(`http://localhost:5000/commentget/${data[0]._id}`)
+    fetch(`https://server-imazharul1101-gmailcom.vercel.app/commentget/${data[0]._id}`)
       .then(res => res.json())
       .then(data => {
         return setArrayCom(data)
       })
       .catch(err => console.error(err))
-  }, [])
+  }, [commentArray])
 
   return (
     <div className='m-5'>
@@ -93,7 +93,7 @@ export default function Service() {
       </div>
       <div className='mt-3'>
         {
-          user ? <div className='d-flex flex-column' style={{ width: '250px' }}><textarea style={{ resize: 'none' }} value={commentValue} onChange={(e) => { setComment(e.target.value) }}></textarea><button className='mt-3' onClick={commentData}>Comment</button></div> : ''
+          user ? <div className='d-flex flex-column' style={{ width: '250px' }}><textarea style={{ resize: 'none' }} value={commentValue} onChange={(e) => { setComment(e.target.value) }} required></textarea><button className='mt-3' onClick={commentData}>Comment</button></div> : ''
         }
 
         <div className='mt-3'>

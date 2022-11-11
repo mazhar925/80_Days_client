@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Table from 'react-bootstrap/Table';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 export default function MyReviews() {
     const data = useLoaderData()
+    const { user } = useContext(AuthContext)
+    const nagivate = useNavigate()
     let index = 0;
-    console.log(data)
+    
+    const deleteComment = (val) => {
+        fetch(`https://server-imazharul1101-gmailcom.vercel.app/commentdelete/${val}`, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(data => {
+            return(
+                nagivate(`/myreviews/${user?.uid}`)
+            )}
+            )
+          .catch(err => console.error(err))
+      }
 
     return (
         <div className='m-5'>
@@ -17,6 +32,7 @@ export default function MyReviews() {
                         <th>Service Name</th>
                         <th>Comment</th>
                         <th>Purchased Date</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +44,7 @@ export default function MyReviews() {
                                     <td>{n?.service_name}</td>
                                     <td>{n?.comment}</td>
                                     <td>{n?.date}</td>
+                                    <td><button onClick={() => { deleteComment(n?._id) }}>Delete</button></td>
                                 </tr>
                             )
                         })
