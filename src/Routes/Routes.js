@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         {
             path: '/',
             element: <Home></Home>,
-            loader: ()=> fetch('http://localhost:5000/')
+            loader: ()=> fetch('https://server-imazharul1101-gmailcom.vercel.app/')
         },
         {
           path: '/login', 
@@ -42,12 +42,12 @@ const router = createBrowserRouter([
         {
           path: '/services',
           element: <Services></Services>,
-          loader: ()=> fetch('http://localhost:5000/services')
+          loader: ()=> fetch('https://server-imazharul1101-gmailcom.vercel.app/services')
         },
         {
           path: '/services/:id',
           element: <Service></Service>,
-          loader: ({params})=> fetch(`http://localhost:5000/services/${params.id}`)
+          loader: ({params})=> fetch(`https://server-imazharul1101-gmailcom.vercel.app/services/${params.id}`)
         },
         {
           path: '/about',
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         {
           path: '/myservices/:id',
           element: <PrivateRoute><MyServices></MyServices></PrivateRoute>,
-          loader: ({params})=> fetch(`http://localhost:5000/myservices/${params.id}`)
+          loader: ({params})=> fetch(`https://server-imazharul1101-gmailcom.vercel.app/myservices/${params.id}`)
         },
         {
           path: '/myreviews',
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         {
           path: '/myreviews/:id',
           element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>,
-          loader: ({params})=> fetch(`http://localhost:5000/myreviews/${params.id}`)
+          loader: ({params})=> fetch(`https://server-imazharul1101-gmailcom.vercel.app/myreviews/${params.id}`)
         },
         {
           path: '/blog',

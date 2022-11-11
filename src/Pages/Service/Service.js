@@ -15,7 +15,7 @@ export default function Service() {
   const [inputValue, setValue] = useState('')
   const [commentValue, setComment] = useState('')
   const [commentArray, setArrayCom] = useState([])
-
+console.log(data)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const valueChecker = (e) => {
@@ -28,7 +28,7 @@ export default function Service() {
       service_name: data[0].name,
       date: new Date()
     }
-    fetch('http://localhost:5000/servicesadd', {
+    fetch('https://server-imazharul1101-gmailcom.vercel.app/servicesadd', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/JSON'
@@ -54,7 +54,7 @@ export default function Service() {
       comment: commentValue,
       date: new Date()
     }
-    fetch('http://localhost:5000/commentadd', {
+    fetch('https://server-imazharul1101-gmailcom.vercel.app/commentadd', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/JSON'
@@ -71,7 +71,7 @@ export default function Service() {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:5000/commentadd/${data[0]?._id}`)
+    fetch(`https://server-imazharul1101-gmailcom.vercel.app/${data[0]?._id}`)
       .then(res => res.json())
       .then(data => {
         setArrayCom(data)
@@ -92,7 +92,7 @@ export default function Service() {
       <p>Price: ${data[0]?.price}</p>
       <div>
         <Link to='/services'><button>Back</button></Link>
-        <button className='ms-3' onClick={handleShow}>Get the Service</button>
+        <button className='ms-3' onClick={user? handleShow: ()=>{navigate('/login')}}>Get the Service</button>
       </div>
       <div className='mt-3'>
         {

@@ -23,7 +23,7 @@ export default function Login() {
             navigate(from, {replace: true})
             form.reset()
             setErr('')
-            fetch('http://localhost:5000/jwt', {
+            fetch('https://server-imazharul1101-gmailcom.vercel.app/jwt', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'
@@ -44,7 +44,7 @@ export default function Login() {
     const handleGoogle = ()=>{
         providerLogin(provider)
         .then(result => {const user = result.user
-          fetch('http://localhost:5000/jwt', {
+          fetch('https://server-imazharul1101-gmailcom.vercel.app/jwt', {
               method: 'POST',
               headers: {
                   'content-type': 'application/json'

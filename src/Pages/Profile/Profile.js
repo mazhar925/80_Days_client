@@ -4,7 +4,6 @@ import { AuthContext } from '../../Context/AuthProvider';
 
 export default function Profile() {
     const { user } = useContext(AuthContext)
-
     return (
         <div className='m-5'>
             <h2 className='mb-3'>Profile</h2>
@@ -13,7 +12,7 @@ export default function Profile() {
             <p>Email: {user?.email}</p>
             <div>
                 <Link to={`/myservices/${user?.uid}`}><button>My Services</button></Link>
-                <Link to={`/myreviews`}><button className='ms-3'>My Reviews</button></Link>
+                <Link to={`/myreviews/${user?.uid}`}><button className='ms-3'>My Reviews</button></Link>
             </div>
         </div>
     )
