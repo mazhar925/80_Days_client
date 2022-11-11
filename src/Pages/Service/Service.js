@@ -15,7 +15,6 @@ export default function Service() {
   const [inputValue, setValue] = useState('')
   const [commentValue, setComment] = useState('')
   const [commentArray, setArrayCom] = useState([])
-console.log(data)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const valueChecker = (e) => {
@@ -24,8 +23,8 @@ console.log(data)
   const purchaseFun = () => {
     const purchaseData = {
       user_id: user?.uid,
-      service_id: data[0]._id,
-      service_name: data[0].name,
+      service_id: data[0]?._id,
+      service_name: data[0]?.name,
       date: new Date()
     }
     fetch('https://server-imazharul1101-gmailcom.vercel.app/servicesadd', {
@@ -45,12 +44,12 @@ console.log(data)
 
   const commentData = () => {
     const commentIn = {
-      service_id: data[0]._id,
-      service_name: data[0].name,
-      user_id: user.uid,
-      user_email: user.email,
-      user_photo: user.photoURL,
-      user_name: user.displayName,
+      service_id: data[0]?._id,
+      service_name: data[0]?.name,
+      user_id: user?.uid,
+      user_email: user?.email,
+      user_photo: user?.photoURL,
+      user_name: user?.displayName,
       comment: commentValue,
       date: new Date()
     }
@@ -69,16 +68,14 @@ console.log(data)
       .catch(err => console.error(err))
 
   }
-
   useEffect(() => {
-    fetch(`https://server-imazharul1101-gmailcom.vercel.app/${data[0]?._id}`)
+    fetch(`http://localhost:5000/commentget/${data[0]._id}`)
       .then(res => res.json())
       .then(data => {
-        setArrayCom(data)
+        return setArrayCom(data)
       })
       .catch(err => console.error(err))
   }, [])
-  console.log(commentArray)
 
   return (
     <div className='m-5'>
@@ -98,19 +95,20 @@ console.log(data)
         {
           user ? <div className='d-flex flex-column' style={{ width: '250px' }}><textarea style={{ resize: 'none' }} value={commentValue} onChange={(e) => { setComment(e.target.value) }}></textarea><button className='mt-3' onClick={commentData}>Comment</button></div> : ''
         }
+
         <div className='mt-3'>
-          {/* {
-          commentArray?.map(n => {
-            <div>
-              <p>{n.comment}</p>
+          {
+          commentArray?.map(n =>{ return(
+            <div key={n._id}>
+              <h4>{n?.comment}</h4>
               <div>
-                <p>{n.user.user_name}</p>
-                <img src={n.user.user_photo} alt={n.user.user_name} />
-                <p>{n.user.date}</p>
+                <p>{n?.user_name}</p>
+                <img src={n?.user_photo} alt={n?.user_name} style={{width: '40px', borderRadius: '50%'}} />
+                <p>Date: {n?.date}</p>
               </div>
             </div>
-          })
-        } */}
+          )})
+        }
         </div>
       </div>
 
